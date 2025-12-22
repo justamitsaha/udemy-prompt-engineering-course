@@ -1,0 +1,278 @@
+
+/* ============================
+   Jupyter / VS Code Notebook Markdown Styling
+   - Theme-aware (light/dark)
+   - Headings, emphasis, links, lists, blockquotes
+   - Tables, code blocks, inline code
+   - Images, horizontal rules, callouts
+   ============================ */
+
+/* ---------- Color System ---------- */
+:root {
+    /* Base colors (Light theme) */
+    --md-fg: #1f2328;           /* primary text */
+    --md-muted: #6b7280;        /* secondary text */
+    --md-bg: #ffffff;           /* page background */
+    --md-soft-bg: #f6f8fa;      /* panel background */
+    --md-border: #e5e7eb;
+  
+    /* Accents */
+    --md-primary: #0ea5e9;      /* links */
+    --md-primary-hover: #0284c7;
+    --md-heading: #e11d48;      /* headings (rose) */
+    --md-italic: #16a34a;       /* green */
+    --md-bold: #0ea5e9;         /* teal/sky */
+    --md-quote: #7c3aed;        /* violet left border */
+    --md-hr: #d1d5db;
+  
+    /* Code */
+    --md-code-fg: #0f172a;      /* slate */
+    --md-code-bg: #f3f4f6;
+    --md-pre-bg: #0b1220;       /* dark panel for fenced code in light theme */
+    --md-pre-fg: #e5e7eb;
+  
+    /* Tables */
+    --md-table-head-bg: #f9fafb;
+    --md-table-row-hover: #f3f4f6;
+  
+    /* Callouts */
+    --md-callout-info-bg: #e0f2fe;
+    --md-callout-info-border: #7dd3fc;
+    --md-callout-warn-bg: #fef3c7;
+    --md-callout-warn-border: #fcd34d;
+    --md-callout-tip-bg: #dcfce7;
+    --md-callout-tip-border: #86efac;
+  
+    /* Inline mark */
+    --md-mark-bg: #fff6a5;
+    --md-kbd-bg: #f8fafc;
+    --md-kbd-border: #cbd5e1;
+  }
+  
+  /* Dark mode (works in VS Code and browsers that honor prefers-color-scheme) */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --md-fg: #e5e7eb;
+      --md-muted: #9ca3af;
+      --md-bg: #0b1220;
+      --md-soft-bg: #0f172a;
+      --md-border: #1f2937;
+  
+      --md-primary: #38bdf8;
+      --md-primary-hover: #22d3ee;
+      --md-heading: #fb7185;
+      --md-italic: #34d399;
+      --md-bold: #38bdf8;
+      --md-quote: #a78bfa;
+      --md-hr: #374151;
+  
+      --md-code-fg: #e5e7eb;
+      --md-code-bg: #111827;
+      --md-pre-bg: #111827;
+      --md-pre-fg: #e5e7eb;
+  
+      --md-table-head-bg: #0f172a;
+      --md-table-row-hover: #111827;
+  
+      --md-callout-info-bg: #082f49;
+      --md-callout-info-border: #0ea5e9;
+      --md-callout-warn-bg: #3f2f06;
+      --md-callout-warn-border: #f59e0b;
+      --md-callout-tip-bg: #052e1a;
+      --md-callout-tip-border: #10b981;
+  
+      --md-mark-bg: #463b15;
+      --md-kbd-bg: #111827;
+      --md-kbd-border: #374151;
+    }
+  }
+  
+  /* ---------- Base Typography ---------- */
+  body, .jp-Cell, .notebook {
+    color: var(--md-fg);
+    background: transparent; /* notebook controls the page bg */
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+                 Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  
+  /* The Markdown output container differs across front-ends */
+  div.text_cell_render, .jp-RenderedHTMLCommon, .rendered_html {
+    color: var(--md-fg);
+  }
+  
+  /* ---------- Headings ---------- */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--md-heading);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 1.25rem 0 0.75rem;
+  }
+  h1 { font-size: 2.0rem; border-bottom: 2px solid var(--md-border); padding-bottom: .3rem; }
+  h2 { font-size: 1.6rem; border-bottom: 1px solid var(--md-border); padding-bottom: .25rem; }
+  h3 { font-size: 1.3rem; }
+  h4 { font-size: 1.15rem; }
+  h5 { font-size: 1.05rem; }
+  h6 { font-size: 0.95rem; color: var(--md-muted); }
+  
+  /* ---------- Emphasis ---------- */
+  em { color: var(--md-italic); font-style: italic; }
+  strong { color: var(--md-bold); font-weight: 700; }
+  em strong, strong em { color: var(--md-heading); }
+  
+  /* ---------- Paragraphs & Muted ---------- */
+  p { margin: 0.6rem 0; }
+  small, .muted { color: var(--md-muted); }
+  
+  /* ---------- Links ---------- */
+  a {
+    color: var(--md-primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  a:hover, a:focus {
+    color: var(--md-primary-hover);
+    border-bottom-color: var(--md-primary-hover);
+  }
+  
+  /* ---------- Lists ---------- */
+  ul, ol { margin: .6rem 0 .6rem 1.2rem; }
+  li { margin: .25rem 0; }
+  li::marker { color: var(--md-muted); }
+  
+  /* ---------- Blockquotes ---------- */
+  blockquote {
+    margin: 0.8rem 0;
+    padding: .6rem .9rem;
+    background: var(--md-soft-bg);
+    border-left: 4px solid var(--md-quote);
+    color: var(--md-fg);
+  }
+  blockquote p { margin: 0.2rem 0; }
+  
+  /* ---------- Horizontal Rule ---------- */
+  hr {
+    border: none;
+    border-top: 1px solid var(--md-hr);
+    margin: 1rem 0;
+  }
+  
+  /* ---------- Tables ---------- */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: .8rem 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    border: 1px solid var(--md-border);
+    padding: .5rem .6rem;
+    vertical-align: top;
+  }
+  thead th {
+    background: var(--md-table-head-bg);
+    text-align: left;
+  }
+  tbody tr:hover {
+    background: var(--md-table-row-hover);
+  }
+  
+  /* ---------- Inline Code ---------- */
+  code {
+    color: var(--md-code-fg);
+    background: var(--md-code-bg);
+    border: 1px solid var(--md-border);
+    border-radius: 4px;
+    padding: 0 .25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+  }
+  
+  /* ---------- Fenced Code Blocks ---------- */
+  pre, pre code {
+    color: var(--md-pre-fg);
+    background: var(--md-pre-bg);
+  }
+  pre {
+    padding: .8rem 1rem;
+    border-radius: 6px;
+    overflow: auto;
+    border: 1px solid var(--md-border);
+    margin: .8rem 0;
+  }
+  
+  /* ---------- Images ---------- */
+  img {
+    max-width: 100%;
+    border-radius: 6px;
+    background: var(--md-soft-bg);
+    padding: 2px;
+    border: 1px solid var(--md-border);
+  }
+  
+  /* ---------- Callouts (use blockquote + keyword) ---------- */
+  /* Example in Markdown:
+  > **Info**: text...
+  > **Warning**: text...
+  > **Tip**: text...
+  */
+  blockquote:has(> p > strong:first-child:contains("Info")) {
+    background: var(--md-callout-info-bg);
+    border-left-color: var(--md-callout-info-border);
+  }
+  blockquote:has(> p > strong:first-child:contains("Warning")) {
+    background: var(--md-callout-warn-bg);
+    border-left-color: var(--md-callout-warn-border);
+  }
+  blockquote:has(> p > strong:first-child:contains("Tip")) {
+    background: var(--md-callout-tip-bg);
+    border-left-color: var(--md-callout-tip-border);
+  }
+  
+  /* ---------- Mark / Highlight ---------- */
+  mark {
+    background: var(--md-mark-bg);
+    padding: 0 .15rem;
+    border-radius: 3px;
+  }
+  
+  /* ---------- Keyboard / kbd ---------- */
+  kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    background: var(--md-kbd-bg);
+    border: 1px solid var(--md-kbd-border);
+    border-bottom-width: 3px;
+    border-radius: 4px;
+    padding: 0 .25rem;
+    color: var(--md-fg);
+  }
+  
+  /* ---------- Definition Lists ---------- */
+  dl { margin: .6rem 0; }
+  dt { font-weight: 700; color: var(--md-bold); }
+  dd { margin: 0 0 .5rem 1rem; }
+  
+  /* ---------- Superscript / Subscript ---------- */
+  sup, sub { font-size: 0.8em; }
+  
+  /* ---------- Code Block Language Labels (optional flair) ---------- */
+  pre::before {
+    content: attr(data-language); /* some renderers set this; VS Code may not */
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--md-muted);
+    margin-bottom: .4rem;
+  }
+  
+  /* ---------- Spacing Tweaks around cell outputs ---------- */
+  .jp-RenderedHTMLCommon, .rendered_html {
+    padding-top: .1rem;
+    padding-bottom: .5rem;
+  }
+  
+  /* ---------- Make sure strong/em inside links keep colors readable ---------- */
+  a strong { color: inherit; }
+  a em { color: inherit; }
+
+  
